@@ -1,35 +1,48 @@
----
+# Site settings
+# bundle exec jekyll serve
+title: Feng Ting Zhang
+email: info@fengtingzhang.com
+url: https://fengtingzhang.github.io/blog
+description: "Main Page for Feng Ting Zhang's Hobby Website"
+#baseurl: /blog
 
-port: 4000
-host: 0.0.0.0
-safe: false
+# Color settings (hex-codes without the leading hash-tag)
+color:
+  primary-dark: '#000000'
+  links: '#219ab3'
 
+# Footer settings
+footer: Feng Ting Zhang
 
-### site serving configuration ###
-exclude: [CNAME, README.md, .gitignore]
-permalink: / ## disables post output
-timezone: null
-lsi: false
+# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
+social:
+  - title: twitter
+    url: https://twitter.com/fengtingzhang
+  - title: github
+    url: https://github.com/fengtingzhang
+  - title: instagram 
+    url: https://instagram.com/moreofsusan
+  - title: linkedin
+    url: https://www.linkedin.com/in/fengtingsusanzhang
+
+# Prototypes I've experimented with
+prototypes:
+  - title: My GitBook
+    url: http://fengtingzhang.gitbooks.io/blog/content/
+  - title: Funny Faces
+    url: http://radiant-lowlands-2074.herokuapp.com/
+  - title: Chinese
+    url: http://phyllispei.github.io/marketing/
+
+# Cool things
+favorites:
+  - title: NER
+    url: http://nlp.stanford.edu:8080/ner/
+  - title: Meteor
+    url: http://fengtingzhang.meteor.com/
+  - title: Local Storage
+    url: http://development.fengtingzhang-markie.divshot.io/
+
+# Build settings
 markdown: kramdown
-highlighter: pygments
-
-
-### content configuration ###
-title:       "菲利斯 - Douglas Elliman"
-keywords:    "Elliman"
-description: "A marketing page for Phyllis"
-source_link: "https://github.com/fengtingzhang/marketing"
-#favicon:     "img/favicon.ico"
-#touch_icon:  "img/apple-touch-icon.png"
-#google_analytics_key: UA-49607422-1 ## put YOUR key here to enable tracking! (blank to disable)
-
-
-### template colors, used site-wide via css ###
-colors:
-  black:     '#111111'
-  white:     '#f8f8f8'
-  blue:      '#405767'
-  green:     '#20664B'
-  purple:    '#443142'
-  orange:    '#20664B'
-  turquoise: '#0fbfcf'
+permalink: pretty
