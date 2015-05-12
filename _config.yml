@@ -30,7 +30,7 @@ prototypes:
   - title: My GitBook
     url: http://fengtingzhang.gitbooks.io/blog/content/
   - title: Heroku Node App
-    url: http://radiant-lowlands-2074.herokuapp.com/
+    url: https://pacific-wildwood-9343.herokuapp.com/
   - title: Chinese
     url: http://phyllispei.github.io/marketing/
 
