@@ -27,11 +27,11 @@ social:
 
 # Prototypes I've experimented with
 prototypes:
-  - title: My GitBook
-    url: http://fengtingzhang.gitbooks.io/blog/content/
+  - title: ElasticSearch
+    url: https://floating-fortress-5275.herokuapp.com/?q=Platform
   - title: My Recent Tweets
     url: https://pacific-wildwood-9343.herokuapp.com/
-  - title: Chinese
+  - title: Marketing Site
     url: http://phyllispei.github.io/marketing/
 
 # Cool things
