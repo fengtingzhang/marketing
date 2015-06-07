@@ -29,6 +29,8 @@ social:
 prototypes:
   - title: ElasticSearch
     url: https://floating-fortress-5275.herokuapp.com/?q=Platform
+  - title: DashBoard
+    url: https://platform-deploy-demo-4783.herokuapp.com/
   - title: My Recent Tweets
     url: https://pacific-wildwood-9343.herokuapp.com/
   - title: Marketing Site
