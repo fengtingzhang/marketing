@@ -28,7 +28,7 @@ social:
 # Prototypes I've experimented with
 prototypes:
   - title: React
-    url: https://platform-demo-9389.herokuapp.com/
+    url: https://platform-demo-9389.herokuapp.com/?q=Platforms
   - title: ElasticSearch
     url: https://floating-fortress-5275.herokuapp.com/?q=Platform
   - title: DashBoard
