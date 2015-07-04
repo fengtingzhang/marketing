@@ -37,6 +37,8 @@ prototypes:
     url: https://pacific-wildwood-9343.herokuapp.com/
   - title: Marketing Site
     url: http://phyllispei.github.io/marketing/
+  - title: React GH
+    url: http://fengtingzhang.github.io/react-config-app/
 
 # Cool things
 favorites:
