@@ -46,8 +46,6 @@ favorites:
     url: http://nlp.stanford.edu:8080/ner/
   - title: Meteor
     url: http://fengtingzhang.meteor.com/
-  - title: Local Storage
-    url: http://development.fengtingzhang-markie.divshot.io/
 
 # Build settings
 markdown: kramdown
