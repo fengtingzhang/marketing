@@ -2,7 +2,7 @@
 # bundle exec jekyll serve
 title: Feng Ting Zhang
 email: info@fengtingzhang.com
-url: https://fengtingzhang.github.io/blog
+url: blog.fengtingzhang.com
 description: "Main Page for Feng Ting Zhang's Hobby Website"
 #baseurl: /blog
 
@@ -20,7 +20,7 @@ social:
     url: https://twitter.com/fengtingzhang
   - title: github
     url: https://github.com/fengtingzhang
-  - title: instagram 
+  - title: instagram
     url: https://instagram.com/moreofsusan
   - title: linkedin
     url: https://www.linkedin.com/in/fengtingsusanzhang
