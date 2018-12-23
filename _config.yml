@@ -44,8 +44,6 @@ prototypes:
 favorites:
   - title: NER
     url: http://nlp.stanford.edu:8080/ner/
-  - title: Meteor
-    url: http://fengtingzhang.meteor.com/
 
 # Build settings
 markdown: kramdown
