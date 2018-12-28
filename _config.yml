@@ -27,17 +27,17 @@ social:
 
 # Prototypes I've experimented with
 prototypes:
-  - title: React
+  - title: ElasticSearch+React
     url: https://platform-demo-9389.herokuapp.com/?q=Platforms
-  - title: ElasticSearch
+  - title: ElasticSearch+Dropwizard
     url: https://floating-fortress-5275.herokuapp.com/?q=Platform
-  - title: DashBoard
-    url: https://platform-deploy-demo-4783.herokuapp.com/
+  - title: A Deployment Dashboard
+    url: https://dashboard-deployment.herokuapp.com/
   - title: My Recent Tweets
     url: https://pacific-wildwood-9343.herokuapp.com/
   - title: Marketing Site
     url: http://phyllispei.github.io/marketing/
-  - title: React GH
+  - title: React over Github Pages
     url: http://fengtingzhang.github.io/react-config-app/
 
 # Cool things
