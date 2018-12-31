@@ -33,8 +33,6 @@ prototypes:
     url: https://floating-fortress-5275.herokuapp.com/?q=Platform
   - title: A Deployment Dashboard
     url: https://dashboard-deployment.herokuapp.com/
-  - title: My Recent Tweets
-    url: https://pacific-wildwood-9343.herokuapp.com/
   - title: Marketing Site
     url: http://phyllispei.github.io/marketing/
   - title: React over Github Pages
