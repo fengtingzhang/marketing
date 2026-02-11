@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goldbelly Partner API v1 Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: #2d3748;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #2d3748;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        h4 {
+            color: #4a5568;
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .metadata {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .metadata p {
+            margin-bottom: 0.5rem;
+        }
+
+        .metadata strong {
+            color: #2d3748;
+            display: inline-block;
+            min-width: 150px;
+        }
+
+        .metadata code {
+            background: #edf2f7;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: #edf2f7;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #e53e3e;
+        }
+
+        pre {
+            background: #2d3748;
+            color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        thead {
+            background: #667eea;
+            color: white;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        .endpoint {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .endpoint summary {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 2rem;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+        }
+
+        .endpoint summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .endpoint summary::before {
+            content: '\25B6';
+            font-size: 0.7rem;
+            color: #718096;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .endpoint[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .endpoint summary:hover {
+            background: #edf2f7;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .endpoint .endpoint-body {
+            padding: 0 2rem 2rem 2rem;
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .endpoint-title {
+            color: #4a5568;
+            font-size: 1rem;
+            font-weight: normal;
+            margin-left: auto;
+        }
+
+        .method {
+            background: #48bb78;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .path {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #2d3748;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+
+        .status-200 {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-401 {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .status-404 {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .note {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .warning {
+            background: #fadbd8;
+            border-left: 4px solid #e74c3c;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .endpoint-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Goldbelly Partner API v1</h1>
+            <p>RESTful API for authorized partners</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#authentication">Authentication</a></li>
+                <li><a href="#endpoints">Endpoints</a></li>
+                <li><a href="#errors">Error Handling</a></li>
+                <li><a href="#best-practices">Best Practices</a></li>
+                <li><a href="#changelog">Changelog</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="overview">
+                <h2>Overview</h2>
+                <p>The Partner API provides programmatic access to Goldbelly data for authorized partners. This RESTful API uses JSON for request and response payloads and requires authentication via Bearer tokens.</p>
+
+                <div class="metadata">
+                    <p><strong>Base URL:</strong> <code>https://api.goldbelly.com/partner_api/v1</code></p>
+                    <p><strong>Authentication:</strong> Bearer token authentication via the <code>Authorization</code> header</p>
+                    <p><strong>Response Format:</strong> JSON</p>
+                </div>
+            </section>
+
+            <section id="authentication">
+                <h2>Authentication</h2>
+                <p>All API requests must include a valid API credential in the <code>Authorization</code> header using the Bearer authentication scheme.</p>
+
+                <h3>Request Header Format</h3>
+                <pre><code>Authorization: Bearer YOUR_API_KEY_HERE</code></pre>
+
+                <h3>API Credential Requirements</h3>
+                <ul>
+                    <li>API keys are 32-character alphanumeric strings</li>
+                    <li>Each request logs usage by updating the credential's <code>last_used_at</code> timestamp</li>
+                    <li>API credentials are tied to a partner entity (polymorphic association)</li>
+                </ul>
+
+                <h3>Authentication Errors</h3>
+                <div class="warning">
+                    <p><strong>401 Unauthorized</strong> - Returned when:</p>
+                    <ul>
+                        <li>No <code>Authorization</code> header is provided</li>
+                        <li>Invalid or expired API key</li>
+                        <li>Malformed authentication header (not using Bearer scheme)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="endpoints">
+                <h2>Endpoints</h2>
+
+                <details class="endpoint">
+                    <summary>
+                        <div class="endpoint-header">
+                            <span class="method">GET</span>
+                            <span class="path">/gift_cards/{code}</span>
+                        </div>
+                        <span class="endpoint-title">Gift Card Lookup</span>
+                    </summary>
+                    <div class="endpoint-body">
+                    <p>Retrieve gift card information by code, with verification via email or phone number.</p>
+
+                    <h4>URL Parameters</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>code</code></td>
+                                <td>string</td>
+                                <td>Yes</td>
+                                <td>Gift card code (case-insensitive)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Query Parameters</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>email</code></td>
+                                <td>string</td>
+                                <td>No*</td>
+                                <td>Email address associated with the gift card (case-insensitive)</td>
+                            </tr>
+                            <tr>
+                                <td><code>phone_number</code></td>
+                                <td>string</td>
+                                <td>No*</td>
+                                <td>Phone number associated with the gift card (normalized to E.164 format)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="note">
+                        <strong>*</strong> At least one of <code>email</code> or <code>phone_number</code> must be provided
+                    </div>
+
+                    <h4>Lookup Logic</h4>
+                    <p><strong>E-Gift Cards:</strong></p>
+                    <ul>
+                        <li>Matches against <code>recipient_email</code>, <code>sender_email</code>, or <code>recipient_phone_number</code></li>
+                        <li>Requires either <code>email</code> OR <code>phone_number</code> parameter</li>
+                    </ul>
+
+                    <p><strong>Physical Gift Cards:</strong></p>
+                    <ul>
+                        <li>Matches against <code>recipient_email</code> or order <code>purchaser_email</code></li>
+                        <li>Requires <code>email</code> parameter (phone lookup not supported)</li>
+                    </ul>
+
+                    <h4>Gift Card Eligibility</h4>
+                    <p>Only returns gift cards that are:</p>
+                    <ul>
+                        <li>Activated</li>
+                        <li>Goldbelly-branded (not merchant-specific)</li>
+                        <li>Match the provided verification credentials</li>
+                    </ul>
+
+                    <h4>Success Response</h4>
+                    <p><span class="status-badge status-200">200 OK</span></p>
+                    <pre><code>{
+  "available_cents": 7500,
+  "code": "abc123xyz",
+  "description": "Gift card for delicious treats",
+  "used_cents": 2500,
+  "value_in_cents": 10000
+}</code></pre>
+
+                    <h4>Response Fields</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>available_cents</code></td>
+                                <td>integer</td>
+                                <td>Remaining balance in cents (derived from <code>balance_in_cents</code>)</td>
+                            </tr>
+                            <tr>
+                                <td><code>code</code></td>
+                                <td>string</td>
+                                <td>Gift card code</td>
+                            </tr>
+                            <tr>
+                                <td><code>description</code></td>
+                                <td>string/null</td>
+                                <td>Optional gift card description</td>
+                            </tr>
+                            <tr>
+                                <td><code>used_cents</code></td>
+                                <td>integer</td>
+                                <td>Amount already redeemed in cents (derived from <code>redeemed_value_in_cents</code>)</td>
+                            </tr>
+                            <tr>
+                                <td><code>value_in_cents</code></td>
+                                <td>integer</td>
+                                <td>Original gift card value in cents</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Error Responses</h4>
+                    <p><span class="status-badge status-404">404 Not Found</span> - Returned when:</p>
+                    <ul>
+                        <li>No <code>code</code> parameter provided</li>
+                        <li>Gift card code doesn't exist</li>
+                        <li>Gift card exists but email/phone doesn't match any associated records</li>
+                        <li>Gift card is not activated or not Goldbelly-branded</li>
+                    </ul>
+                    <pre><code>{
+  "code": "404",
+  "errors": null,
+  "message": "Entity could not be found",
+  "status": 404
+}</code></pre>
+
+                    <h4>Example Requests</h4>
+                    <p><strong>E-Gift Lookup by Email:</strong></p>
+                    <pre><code>curl -X GET "https://api.goldbelly.com/partner_api/v1/gift_cards/ABC123XYZ?email=customer@example.com" \
+  -H "Authorization: Bearer YOUR_API_KEY"</code></pre>
+
+                    <p><strong>E-Gift Lookup by Phone:</strong></p>
+                    <pre><code>curl -X GET "https://api.goldbelly.com/partner_api/v1/gift_cards/ABC123XYZ?phone_number=3078558012" \
+  -H "Authorization: Bearer YOUR_API_KEY"</code></pre>
+                    </div>
+                </details>
+
+                <details class="endpoint">
+                    <summary>
+                        <div class="endpoint-header">
+                            <span class="method">GET</span>
+                            <span class="path">/orders/tracking</span>
+                        </div>
+                        <span class="endpoint-title">Order Tracking</span>
+                    </summary>
+                    <div class="endpoint-body">
+                    <p>Retrieve shipping and tracking information for completed order packages.</p>
+
+                    <h4>Query Parameters</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>order_id</code></td>
+                                <td>integer</td>
+                                <td>Yes</td>
+                                <td>Goldbelly order ID</td>
+                            </tr>
+                            <tr>
+                                <td><code>email</code></td>
+                                <td>string</td>
+                                <td>Yes</td>
+                                <td>Purchaser email address (case-insensitive)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Lookup Logic</h4>
+                    <ul>
+                        <li>Finds orders by exact ID match</li>
+                        <li>Verifies ownership via case-insensitive email match against <code>purchaser_email</code></li>
+                        <li>Only returns completed orders</li>
+                        <li>Filters to completed suborders that are not canceled</li>
+                    </ul>
+
+                    <h4>Success Response</h4>
+                    <p><span class="status-badge status-200">200 OK</span></p>
+                    <p>Returns an array of tracking information objects, one per completed suborder (package).</p>
+                    <pre><code>[
+  {
+    "carrier": "ups",
+    "delivery_address": "123 Main St, Apt 4B, New York, NY, 10001",
+    "delivery_date": "2024-01-17",
+    "merchant_name": "Joe's Stone Crab",
+    "order_id": 12345678,
+    "product_names": "Original PieCaken",
+    "product_urls": [
+      "https://www.goldbelly.com/joes-stone-crab/original-piecaken"
+    ],
+    "recipient_name": "Jane Doe",
+    "ship_date": "2024-01-15",
+    "status": "in_transit",
+    "total_in_cents": 9999,
+    "tracking_number": "1Z999AA1234567890",
+    "tracking_url": "https://www.ups.com/track?tracknum=1Z999AA1234567890"
+  }
+]</code></pre>
+
+                    <h4>Response Fields</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>carrier</code></td>
+                                <td>string/null</td>
+                                <td>Shipping carrier (e.g., "ups", "fedex") from current shipping label</td>
+                            </tr>
+                            <tr>
+                                <td><code>delivery_address</code></td>
+                                <td>string</td>
+                                <td>Comma-separated delivery address (street1, street2, city, state, postal code)</td>
+                            </tr>
+                            <tr>
+                                <td><code>delivery_date</code></td>
+                                <td>string/null</td>
+                                <td>ISO 8601 date string of requested delivery date</td>
+                            </tr>
+                            <tr>
+                                <td><code>merchant_name</code></td>
+                                <td>string</td>
+                                <td>Name(s) of merchant(s) fulfilling the suborder</td>
+                            </tr>
+                            <tr>
+                                <td><code>order_id</code></td>
+                                <td>integer</td>
+                                <td>Goldbelly order ID</td>
+                            </tr>
+                            <tr>
+                                <td><code>product_names</code></td>
+                                <td>string</td>
+                                <td>Comma-separated product names, truncated to 40 characters</td>
+                            </tr>
+                            <tr>
+                                <td><code>product_urls</code></td>
+                                <td>array of strings</td>
+                                <td>URLs to the product pages on Goldbelly</td>
+                            </tr>
+                            <tr>
+                                <td><code>recipient_name</code></td>
+                                <td>string</td>
+                                <td>Full name of the delivery recipient</td>
+                            </tr>
+                            <tr>
+                                <td><code>ship_date</code></td>
+                                <td>string/null</td>
+                                <td>ISO 8601 date string of scheduled ship date</td>
+                            </tr>
+                            <tr>
+                                <td><code>status</code></td>
+                                <td>string</td>
+                                <td>Current tracking status or "unknown" if unavailable</td>
+                            </tr>
+                            <tr>
+                                <td><code>total_in_cents</code></td>
+                                <td>integer</td>
+                                <td>Suborder total including taxes, in cents</td>
+                            </tr>
+                            <tr>
+                                <td><code>tracking_number</code></td>
+                                <td>string/null</td>
+                                <td>Carrier tracking number</td>
+                            </tr>
+                            <tr>
+                                <td><code>tracking_url</code></td>
+                                <td>string/null</td>
+                                <td>Full URL to carrier tracking page</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Status Values</h4>
+                    <p>The <code>status</code> field reflects the current state from the shipping label tracking system. Common values include:</p>
+                    <ul>
+                        <li><code>shipped</code></li>
+                        <li><code>in_transit</code></li>
+                        <li><code>out_for_delivery</code></li>
+                        <li><code>delivered</code></li>
+                        <li><code>unknown</code> (when no tracking data is available)</li>
+                    </ul>
+
+                    <h4>Error Responses</h4>
+                    <p><span class="status-badge status-404">404 Not Found</span> - Returned when:</p>
+                    <ul>
+                        <li>Order ID doesn't exist</li>
+                        <li>Email doesn't match the order's purchaser email</li>
+                        <li>Order exists but has no completed, non-canceled suborders</li>
+                    </ul>
+                    <pre><code>{
+  "code": "404",
+  "errors": null,
+  "message": "Entity could not be found",
+  "status": 404
+}</code></pre>
+
+                    <h4>Example Request</h4>
+                    <pre><code>curl -X GET "https://api.goldbelly.com/partner_api/v1/orders/tracking?order_id=12345678&email=customer@example.com" \
+  -H "Authorization: Bearer YOUR_API_KEY"</code></pre>
+                    </div>
+                </details>
+
+                <details class="endpoint">
+                    <summary>
+                        <div class="endpoint-header">
+                            <span class="method" style="background: #ed8936;">POST</span>
+                            <span class="path">/orders/{id}/cancel</span>
+                        </div>
+                        <span class="endpoint-title">Order Cancellation</span>
+                    </summary>
+                    <div class="endpoint-body">
+                    <p>Cancel a completed order. The order must still be in a cancellable state.</p>
+
+                    <h4>URL Parameters</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>id</code></td>
+                                <td>integer</td>
+                                <td>Yes</td>
+                                <td>Goldbelly order ID</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Request Body Parameters</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>email</code></td>
+                                <td>string</td>
+                                <td>Yes</td>
+                                <td>Purchaser email address (case-insensitive)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Lookup &amp; Cancellation Logic</h4>
+                    <ul>
+                        <li>Finds the order by exact ID match</li>
+                        <li>Verifies ownership via case-insensitive email match against <code>purchaser_email</code></li>
+                        <li>Only operates on completed orders</li>
+                        <li>Validates the order is still in a cancellable state before proceeding</li>
+                        <li>Processes a full cancellation with refund</li>
+                    </ul>
+
+                    <h4>Success Response</h4>
+                    <p><span class="status-badge" style="background: #c6f6d5; color: #22543d;">204 No Content</span></p>
+                    <p>Returns an empty response body on successful cancellation.</p>
+
+                    <h4>Error Responses</h4>
+                    <p><span class="status-badge status-404">404 Not Found</span> - Returned when:</p>
+                    <ul>
+                        <li>Order ID doesn't exist</li>
+                        <li>Email doesn't match the order's purchaser email</li>
+                        <li>Order is not in a completed state</li>
+                    </ul>
+                    <pre><code>{
+  "code": "404",
+  "errors": null,
+  "message": "Entity could not be found",
+  "status": 404
+}</code></pre>
+
+                    <p><span class="status-badge" style="background: #e9d8fd; color: #553c9a;">422 Unprocessable Entity</span> - Returned when:</p>
+                    <ul>
+                        <li>The order is not in a cancellable state (e.g., already shipped or delivered)</li>
+                        <li>The cancellation service encounters an error during processing</li>
+                    </ul>
+                    <pre><code>{
+  "code": "422",
+  "errors": null,
+  "message": "Something went wrong trying to cancel the order #12345678",
+  "status": 422
+}</code></pre>
+
+                    <h4>Example Request</h4>
+                    <pre><code>curl -X POST "https://api.goldbelly.com/partner_api/v1/orders/12345678/cancel" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "customer@example.com"}'</code></pre>
+                    </div>
+                </details>
+
+                <details class="endpoint">
+                    <summary>
+                        <div class="endpoint-header">
+                            <span class="method" style="background: #ed8936;">POST</span>
+                            <span class="path">/orders/resend_confirmation</span>
+                        </div>
+                        <span class="endpoint-title">Resend Confirmation Emails</span>
+                    </summary>
+                    <div class="endpoint-body">
+                    <p>Re-trigger order confirmation emails for a customer. Can target a specific order or all recent orders for a given email address.</p>
+
+                    <h4>Request Body Parameters</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>email</code></td>
+                                <td>string</td>
+                                <td>Yes</td>
+                                <td>Purchaser email address (case-insensitive)</td>
+                            </tr>
+                            <tr>
+                                <td><code>order_id</code></td>
+                                <td>integer</td>
+                                <td>No</td>
+                                <td>Specific Goldbelly order ID. If omitted, targets all recent orders for the email.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Lookup Logic</h4>
+                    <ul>
+                        <li><strong>With <code>order_id</code>:</strong> Finds the specific completed order by ID and verifies the email matches <code>purchaser_email</code></li>
+                        <li><strong>Without <code>order_id</code>:</strong> Finds all completed orders for the email within the last <strong>7 days</strong></li>
+                        <li>Maximum of <strong>5 orders</strong> can be processed per request</li>
+                    </ul>
+
+                    <h4>Processing Details</h4>
+                    <ul>
+                        <li>Clears any email hard bounces for the customer before resending</li>
+                        <li>Re-triggers the order confirmation email for each matched order</li>
+                        <li>Reports per-order success/failure in the response</li>
+                    </ul>
+
+                    <h4>Success Response</h4>
+                    <p><span class="status-badge status-200">200 OK</span></p>
+                    <pre><code>{
+  "emails_failed": 0,
+  "emails_sent": 2,
+  "orders_found": 2,
+  "results": [
+    {
+      "product": "Original PieCaken",
+      "email_sent": true
+    },
+    {
+      "product": "Chicago Deep Dish Pizza",
+      "email_sent": true
+    }
+  ],
+  "time_window_days": 7
+}</code></pre>
+
+                    <h4>Response Fields</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>emails_failed</code></td>
+                                <td>integer</td>
+                                <td>Number of orders where the confirmation email failed to send</td>
+                            </tr>
+                            <tr>
+                                <td><code>emails_sent</code></td>
+                                <td>integer</td>
+                                <td>Number of orders where the confirmation email was successfully queued</td>
+                            </tr>
+                            <tr>
+                                <td><code>orders_found</code></td>
+                                <td>integer</td>
+                                <td>Total number of matching orders found</td>
+                            </tr>
+                            <tr>
+                                <td><code>results</code></td>
+                                <td>array</td>
+                                <td>Per-order results</td>
+                            </tr>
+                            <tr>
+                                <td><code>results[].product</code></td>
+                                <td>string</td>
+                                <td>Primary product name for the order</td>
+                            </tr>
+                            <tr>
+                                <td><code>results[].email_sent</code></td>
+                                <td>boolean</td>
+                                <td>Whether the confirmation email was successfully queued</td>
+                            </tr>
+                            <tr>
+                                <td><code>time_window_days</code></td>
+                                <td>integer</td>
+                                <td>The lookback window in days used when searching by email only (currently 7)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Error Responses</h4>
+                    <p><span class="status-badge status-404">404 Not Found</span> - Returned when:</p>
+                    <ul>
+                        <li>No completed orders found for the given email (within the 7-day window)</li>
+                        <li>Specified <code>order_id</code> doesn't exist or email doesn't match</li>
+                    </ul>
+                    <pre><code>{
+  "code": "404",
+  "errors": null,
+  "message": "Entity could not be found",
+  "status": 404
+}</code></pre>
+
+                    <p><span class="status-badge" style="background: #e9d8fd; color: #553c9a;">422 Unprocessable Entity</span> - Returned when:</p>
+                    <ul>
+                        <li>Total matching orders exceeds the limit of 5</li>
+                    </ul>
+                    <pre><code>{
+  "code": "422",
+  "errors": null,
+  "message": "Orders total (6) exceeds limit (5)",
+  "status": 422
+}</code></pre>
+
+                    <h4>Example Requests</h4>
+                    <p><strong>Resend for a specific order:</strong></p>
+                    <pre><code>curl -X POST "https://api.goldbelly.com/partner_api/v1/orders/resend_confirmation" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "customer@example.com", "order_id": 12345678}'</code></pre>
+
+                    <p><strong>Resend for all recent orders:</strong></p>
+                    <pre><code>curl -X POST "https://api.goldbelly.com/partner_api/v1/orders/resend_confirmation" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "customer@example.com"}'</code></pre>
+                    </div>
+                </details>
+            </section>
+
+            <section id="errors">
+                <h2>Error Handling</h2>
+                <p>The API uses standard HTTP status codes and returns consistent error response structures.</p>
+
+                <h3>Error Response Format</h3>
+                <pre><code>{
+  "code": "404",
+  "errors": null,
+  "message": "Entity could not be found",
+  "status": 404
+}</code></pre>
+
+                <h4>Error Response Fields</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>code</code></td>
+                            <td>string</td>
+                            <td>HTTP status code as string</td>
+                        </tr>
+                        <tr>
+                            <td><code>errors</code></td>
+                            <td>object/null</td>
+                            <td>Validation errors object (key-value pairs of field errors)</td>
+                        </tr>
+                        <tr>
+                            <td><code>message</code></td>
+                            <td>string</td>
+                            <td>Human-readable error message</td>
+                        </tr>
+                        <tr>
+                            <td><code>status</code></td>
+                            <td>integer</td>
+                            <td>HTTP status code</td>
+                        </tr>
+                        <tr>
+                            <td><code>help_url</code></td>
+                            <td>string/null</td>
+                            <td>Optional URL to documentation or help resources</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>HTTP Status Codes</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th>Common Causes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>200</code></td>
+                            <td>OK</td>
+                            <td>Request succeeded</td>
+                        </tr>
+                        <tr>
+                            <td><code>204</code></td>
+                            <td>No Content</td>
+                            <td>Request succeeded with no response body (e.g., order cancellation)</td>
+                        </tr>
+                        <tr>
+                            <td><code>400</code></td>
+                            <td>Bad Request</td>
+                            <td>Missing required parameters, unpermitted parameters</td>
+                        </tr>
+                        <tr>
+                            <td><code>401</code></td>
+                            <td>Unauthorized</td>
+                            <td>Missing, invalid, or expired API credentials</td>
+                        </tr>
+                        <tr>
+                            <td><code>404</code></td>
+                            <td>Not Found</td>
+                            <td>Resource doesn't exist or verification failed</td>
+                        </tr>
+                        <tr>
+                            <td><code>422</code></td>
+                            <td>Unprocessable Entity</td>
+                            <td>Validation errors, duplicate records</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Common Error Scenarios</h3>
+                <h4>Missing Authentication</h4>
+                <pre><code>{
+  "code": "401",
+  "errors": null,
+  "message": "Unauthorized",
+  "status": 401
+}</code></pre>
+
+                <h4>Parameter Validation Errors</h4>
+                <pre><code>{
+  "code": "400",
+  "errors": null,
+  "message": "param is missing or the value is empty: email",
+  "status": 400
+}</code></pre>
+            </section>
+
+            <section id="best-practices">
+                <h2>Rate Limiting & Best Practices</h2>
+
+                <h3>Usage Logging</h3>
+                <ul>
+                    <li>Every authenticated request logs usage by updating the API credential's <code>last_used_at</code> timestamp</li>
+                    <li>This occurs even for failed requests (404, validation errors, etc.)</li>
+                    <li>Monitor your credential's usage patterns via your partner dashboard</li>
+                </ul>
+
+                <h3>Best Practices</h3>
+
+                <h4>1. Case Sensitivity</h4>
+                <ul>
+                    <li>Email addresses are normalized to lowercase</li>
+                    <li>Gift card codes are normalized to lowercase</li>
+                    <li>Always send case-insensitive queries</li>
+                </ul>
+
+                <h4>2. Phone Number Formatting</h4>
+                <ul>
+                    <li>Phone numbers are normalized to E.164 format (<code>+13078558012</code>)</li>
+                    <li>Submit numbers with or without country code - the API handles normalization</li>
+                    <li>International numbers are supported</li>
+                </ul>
+
+                <h4>3. Error Handling</h4>
+                <ul>
+                    <li>Always check HTTP status codes before parsing response body</li>
+                    <li>Implement retry logic with exponential backoff for 5xx errors</li>
+                    <li>Do not retry 4xx errors (client errors) without fixing the request</li>
+                </ul>
+
+                <h4>4. Security</h4>
+                <ul>
+                    <li>Never expose API credentials in client-side code</li>
+                    <li>Rotate credentials if compromised</li>
+                    <li>Use HTTPS for all requests (enforced by default)</li>
+                </ul>
+
+                <h4>5. Data Privacy</h4>
+                <ul>
+                    <li>Gift card and order lookups require PII verification (email/phone)</li>
+                    <li>This ensures only authorized parties can access sensitive information</li>
+                    <li>Never cache or store customer PII unnecessarily</li>
+                </ul>
+            </section>
+
+            <section id="versioning">
+                <h2>API Versioning</h2>
+                <p>This is version 1 of the Partner API (<code>/partner_api/v1</code>).</p>
+                <ul>
+                    <li>The API version is part of the URL path</li>
+                    <li>Breaking changes will result in a new API version</li>
+                    <li>Non-breaking changes (new optional fields, new endpoints) may be added to existing versions</li>
+                    <li>Deprecated versions will be supported for a minimum of 6 months after deprecation notice</li>
+                </ul>
+            </section>
+
+            <section id="support">
+                <h2>Support & Contact</h2>
+                <p>For API access requests, technical support, or to report issues:</p>
+                <div class="metadata">
+                    <p><strong>Email:</strong> <a href="mailto:dev@goldbelly.com">dev@goldbelly.com</a></p>
+                    <p><strong>GitHub:</strong> <a href="https://github.com/goldbely" target="_blank">https://github.com/goldbely</a></p>
+                </div>
+            </section>
+
+            <section id="changelog">
+                <h2>Changelog</h2>
+                <h3>Version 1.2.0 (Current)</h3>
+                <ul>
+                    <li>Added order cancellation endpoint (<code>POST /orders/{id}/cancel</code>)</li>
+                    <li>Added resend confirmation emails endpoint (<code>POST /orders/resend_confirmation</code>)</li>
+                    <li>Added <code>delivery_address</code>, <code>product_urls</code>, <code>recipient_name</code>, and <code>total_in_cents</code> fields to order tracking response</li>
+                </ul>
+                <h3>Version 1.0.0</h3>
+                <ul>
+                    <li>Initial release</li>
+                    <li>Gift card lookup endpoint</li>
+                    <li>Order tracking endpoint</li>
+                    <li>Bearer token authentication</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Goldbelly. All rights reserved.</p>
+            <p><a href="mailto:dev@goldbelly.com">dev@goldbelly.com</a> | <a href="https://github.com/goldbely" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+</body>
+</html>
